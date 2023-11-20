@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class Queue<T> {
-    private List<T> queue;
+public class Queue<T> implements Aggregate<T> {
+    private final List<T> queue;
 
     Queue() {
         queue = new ArrayList<>();
@@ -24,7 +24,11 @@ public class Queue<T> {
     }
 
     public String toString() {
-        return queue.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T queueValue : queue) {
+            stringBuilder.append(queueValue).append(' ');
+        }
+        return stringBuilder.toString();
     }
 
     public T front() throws NoSuchElementException {
@@ -56,8 +60,12 @@ public class Queue<T> {
         queue.addAll(collection);
     }
 
+    public T get(int index) throws IndexOutOfBoundsException {
+        return queue.get(index);
+    }
 
-
-
-
+    @Override
+    public Iterator<T> createIterator() {
+        return new QueueIterator<>(this);
+    }
 }
