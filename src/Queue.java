@@ -1,3 +1,5 @@
+import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import java.util.*;
 
 public class Queue<T> implements Aggregate<T> {
@@ -67,5 +69,11 @@ public class Queue<T> implements Aggregate<T> {
     @Override
     public Iterator<T> createIterator() {
         return new QueueIterator<>(this);
+    }
+
+    public ListModel<T> getListModel() {
+        DefaultListModel<T> listModel = new DefaultListModel<>();
+        listModel.addAll(queue.stream().toList());
+        return listModel;
     }
 }
