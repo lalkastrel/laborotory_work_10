@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
@@ -43,11 +44,12 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String pushData = pushTextField.getText();
-                StringTokenizer stringTokenizer = new StringTokenizer(pushData, ";");
+                /*StringTokenizer stringTokenizer = new StringTokenizer(pushData, ";");
                 while (stringTokenizer.hasMoreTokens()) {
                     queue.push(stringTokenizer.nextToken());
-                    data.setModel(queue.getListModel());
-                }
+                }*/
+                queue.pushAll(List.of(pushData.split(";")));
+                data.setModel(queue.getListModel());
                 pushTextField.setText("");
             }
         });
